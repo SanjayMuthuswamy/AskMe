@@ -1,6 +1,6 @@
-# 🧠 AskMe – AI-Powered Document Chat Assistant
+#  AskMe – AI-Powered Document Chat Assistant
 
-AskMe is an intelligent document-based chatbot that allows users to upload files (PDF, DOCX, TXT, etc.) and instantly ask questions about their contents.  
+AskMe is an intelligent document-based chatbot that allows users to upload files (PDF,TXT) and instantly ask questions about their contents.  
 It combines **RAG (Retrieval-Augmented Generation)** with **Ollama LLMs** for accurate, context-aware answers — running completely **locally** for privacy and speed.
 
 ---
