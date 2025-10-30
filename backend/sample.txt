@@ -1,0 +1,3 @@
+LangChain helps build RAG (Retrieval-Augmented Generation) systems that connect LLMs to your own data.
+my name model name is sanjay m 
+It provides tools for text splitting, vector databases, and model integration.

@@ -1,0 +1,7 @@
+{
+  "name": "DocuRAG",
+  "description": "An AI-powered document retrieval and question-answering platform. Upload your documents and let AI answer your questions instantly.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
