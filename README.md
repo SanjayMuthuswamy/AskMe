@@ -99,6 +99,5 @@ npm run dev
 ## 💡 Author
 
 **Sanjay Muthuswamy** – AI Enthusiast & Innovator  
-Building privacy-first intelligent assistants 🧠
 
 ---
