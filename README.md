@@ -28,7 +28,7 @@ Then, pull the required models:
 
 ```bash
 ollama pull llama3
-ollama pull all-MiniLM-L6-v2
+ollama pull nomic-embed-text
 ```
 
 ---
@@ -52,11 +52,6 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-Then open your browser and go to:
-
-```
-http://127.0.0.1:8000/docs
-```
 
 ---
 
@@ -77,7 +72,7 @@ npm run dev
 |------------|-------------|
 | **Backend** | FastAPI |
 | **LLM Engine** | Ollama (Llama 3) |
-| **Embeddings** | all-MiniLM-L6-v2 |
+| **Embeddings** | nomic-embed-text|
 | **Vector Store** | FAISS |
 | **Framework** | LangChain |
 | **Frontend (optional)** | React + Tailwind |
