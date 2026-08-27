@@ -4,7 +4,7 @@ import { UploadCloudIcon, CheckCircleIcon, FileIcon, XCircleIcon } from "../comp
 import { useDocument } from "../contexts/DocumentContext";
 import { uploadDocument } from "../services/api";
 
-const ALLOWED_EXTENSIONS = [".pdf",".txt"];
+const ALLOWED_EXTENSIONS = [".pdf", ".txt", ".md"];
 const MAX_FILE_SIZE_MB = 10;
 
 const UploadPage = () => {
@@ -70,9 +70,11 @@ const UploadPage = () => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setStatus("ready");
-          setKnowledgeBaseGenerated(true);
-          setTimeout(() => navigate("/ask"), 1000);
+          setTimeout(() => {
+            setStatus("ready");
+            setKnowledgeBaseGenerated(true);
+            setTimeout(() => navigate("/ask"), 1000);
+          }, 0);
           return 100;
         }
         return prev + 20;

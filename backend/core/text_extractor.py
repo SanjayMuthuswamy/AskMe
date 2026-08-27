@@ -9,8 +9,8 @@ def extract_text_from_file(file_path: str):
             text += page.extract_text() or ""
         return text
 
-    elif file_path.endswith(".txt"):
-        with open(file_path, "r", encoding="utf-8") as f:
+    elif file_path.endswith(".txt") or file_path.endswith(".md"):
+        with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
             return f.read()
 
     else:

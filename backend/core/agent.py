@@ -49,28 +49,24 @@ tools = [
          description="Rerank previously retrieved docs for better accuracy. Always use after searching."),
 ]
 
-AGENT_PROMPT = PromptTemplate.from_template("""You are AskMe, a document Q&A agent. Answer the user's question using ONLY the provided tools.
+AGENT_PROMPT = PromptTemplate.from_template("""You are AskMe, an expert document Q&A assistant.
+Answer the user's question using the provided tools.
 
-Strategy:
-1. First, search using search_faiss OR search_bm25 (pick based on query type)
-2. Then, rerank the results using rerank_results
-3. Finally, answer from the reranked context
-
-You have access to these tools:
+Tools available:
 {tools}
 
 Tool names: {tool_names}
 
-Use this format:
+Use the following strict ReAct format:
 
-Question: the input question
-Thought: what to do next
-Action: tool name
-Action Input: input for the tool
-Observation: tool result
-... (repeat Thought/Action/Observation as needed)
-Thought: I have enough info to answer
-Final Answer: the answer
+Question: {input}
+Thought: Reasoning about what action to take next.
+Action: MUST be one of [{tool_names}]
+Action Input: The plain search query text (NO parentheses, NO quotes around tool call).
+Observation: Result of the action.
+... (this Thought/Action/Action Input/Observation can repeat at most twice)
+Thought: I know the final answer or have searched the document.
+Final Answer: Provide the answer based on retrieved context. If no relevant info was found in the document, politely state that and provide a helpful response.
 
 Begin!
 
@@ -80,12 +76,12 @@ Thought: {agent_scratchpad}""")
 
 def create_agent(retriever):
     """Create a ReAct agent with search and rerank tools."""
-    llm = OllamaLLM(model=LLM_MODEL)
+    llm = OllamaLLM(model=LLM_MODEL, temperature=0.1)
     agent = create_react_agent(llm=llm, tools=tools, prompt=AGENT_PROMPT)
     return AgentExecutor(
         agent=agent,
         tools=tools,
         verbose=True,
-        handle_parsing_errors=True,
-        max_iterations=5,
+        handle_parsing_errors="Check your output format! Ensure you write Action: <tool_name> on one line and Action Input: <query> on the next line.",
+        max_iterations=4,
     )

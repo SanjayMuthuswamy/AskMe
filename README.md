@@ -34,6 +34,27 @@
 
 ---
 
+## 🖼️ Application Screenshots
+
+<div align="center">
+
+### 1. Document Upload & Processing
+![Document Upload](docs/images/upload_page.png)
+
+<br/>
+
+### 2. Context-Aware Q&A Chat Interface
+![Chat Interface](docs/images/chat_interface.png)
+
+<br/>
+
+### 3. General Knowledge Fallback Integration
+![General Knowledge Fallback](docs/images/general_knowledge_fallback.png)
+
+</div>
+
+---
+
 ## 🏗️ Architecture
 
 ```

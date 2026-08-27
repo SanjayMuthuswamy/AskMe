@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+uploads/
+node_modules/
+dist/
+Screenshot 2026-08-27 *.png

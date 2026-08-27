@@ -1,4 +1,4 @@
-from fastapi import APIRouter, UploadFile, File
+from fastapi import APIRouter, UploadFile, File, HTTPException
 import os
 import time
 from utils.config import UPLOAD_DIR
@@ -27,13 +27,30 @@ async def upload_document(file: UploadFile = File(...)):
 
     # Extract text
     t = time.time()
-    text = extract_text_from_file(file_path)
+    try:
+        text = extract_text_from_file(file_path)
+    except ValueError as ve:
+        raise HTTPException(status_code=400, detail=str(ve))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
     print(f"[EXTRACT] Done in {time.time() - t:.2f}s")
+
+    if not text or not text.strip():
+        raise HTTPException(
+            status_code=400,
+            detail="The uploaded file contains no readable text. Please upload a valid document or text file."
+        )
 
     # Split into chunks
     t = time.time()
     docs = split_text(text)
     print(f"[SPLIT] {len(docs)} chunks in {time.time() - t:.2f}s")
+
+    if not docs:
+        raise HTTPException(
+            status_code=400,
+            detail="No text chunks could be extracted from the file."
+        )
 
     # Create embeddings
     t = time.time()
