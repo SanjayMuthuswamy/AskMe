@@ -1,7 +1,7 @@
-from PyPDF2 import PdfReader
+from pypdf import PdfReader
 
 def extract_text_from_file(file_path: str):
-    """Extract text from .pdf or .txt fle."""
+    """Extract text from .pdf or .txt file."""
     if file_path.endswith(".pdf"):
         reader = PdfReader(file_path)
         text = ""
