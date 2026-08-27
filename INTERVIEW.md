@@ -172,7 +172,23 @@ The agent decides which to use based on the query type.
 
 ---
 
-### 9️⃣ "Walk me through the tech stack"
+### 9️⃣ "How did you optimize for low latency and zero/minimal token cost?"
+
+**1. Zero API Token Cost ($0)**
+- **Local LLM & Embedding Inference**: Used `Ollama` (`llama3.2`) and local `nomic-embed-text` embeddings. Everything executes on device with $0 API bill and no rate limits.
+
+**2. Two-Stage RAG (Bi-Encoder Retrieval + Cross-Encoder Reranking)**
+- **Bi-Encoder FAISS/BM25**: Fast retrieval fetches ~10 candidate chunks in milliseconds.
+- **Cross-Encoder Reranker (`ms-marco-MiniLM-L-6-v2`)**: Filters the 10 candidates down to **Top 3 most relevant chunks**.
+- **Context Window Optimization**: By passing only the top 3 reranked chunks (~1000 tokens) to the LLM instead of all 10 chunks (~4000+ tokens), we **reduce prompt processing time by over 60%** and keep memory consumption minimal.
+
+**3. Model & Chunking Optimizations**
+- **Optimal Chunk Size**: Chunks of 1500 chars with 100 overlap balance context quality without ballooning token counts.
+- **Local Pre-loading**: Models (`ms-marco-MiniLM`) are pre-loaded in memory during document upload to avoid warm-up delays when users type questions.
+
+---
+
+### 🔟 "Walk me through the tech stack"
 
 ```
 ┌─────────────────────────────────────────────────────┐
