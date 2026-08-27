@@ -146,7 +146,19 @@ The agent decides which to use based on the query type.
 
 ---
 
-### 7️⃣ "Walk me through the tech stack"
+### 7️⃣ "Why upload a document each time? How would you make it persist across multiple documents?"
+
+**Why single-session upload currently?**
+- **Focused Scope & Privacy**: In an interactive session-based RAG tool, rebuilding the index per document session guarantees strict document isolation (no cross-document context leaks) and keeps memory consumption minimal on a local machine.
+
+**How to answer in an interview when asked how to support multi-document persistent queries:**
+1. **Persistent Vector Database**: Replace in-memory FAISS with a persistent DB like **ChromaDB**, **Qdrant**, or **pgvector**.
+2. **Metadata Filtering & Document IDs**: Store `doc_id` and `file_name` in the payload metadata of each chunk.
+3. **Multi-Document RAG Querying**: Allow users to query across all previously uploaded documents simultaneously or filter queries by specific `doc_id` tags.
+
+---
+
+### 8️⃣ "Walk me through the tech stack"
 
 ```
 ┌─────────────────────────────────────────────────────┐
