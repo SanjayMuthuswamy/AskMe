@@ -158,7 +158,21 @@ The agent decides which to use based on the query type.
 
 ---
 
-### 8️⃣ "Walk me through the tech stack"
+### 8️⃣ "Why did you use FAISS as your vector store?"
+
+**Why FAISS (Facebook AI Similarity Search)?**
+1. **Ultra-Fast In-Memory Similarity Search**: FAISS is written in C++ with Python bindings, optimized for high-performance vector indexing and sub-millisecond similarity search.
+2. **Zero Setup Overhead**: Requires no standalone database service, daemon, or server container running in the background.
+3. **Low Memory & Resource Footprint**: Perfect for local-first desktop applications running alongside Ollama on standard consumer hardware.
+4. **Seamless Integration**: Native `langchain_community` support (`FAISS.from_documents()`).
+
+**Comparison with alternatives:**
+- **VS ChromaDB / Qdrant**: Chroma/Qdrant offer built-in disk persistence out-of-the-box, but FAISS provides faster raw in-memory retrieval without database file management overhead for single-session document analysis.
+- **VS Pinecone / Weaviate**: Cloud vector databases introduce API latency, internet dependency, and token/storage costs, defeating our 100% local privacy design.
+
+---
+
+### 9️⃣ "Walk me through the tech stack"
 
 ```
 ┌─────────────────────────────────────────────────────┐
