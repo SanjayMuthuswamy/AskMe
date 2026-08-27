@@ -1,3 +1,5 @@
+// AskMe – Root Application Component
+// Handles client-side routing and global layout structure
 
 import React from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
